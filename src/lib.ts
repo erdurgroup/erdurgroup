@@ -5,7 +5,7 @@ export const S = site;
 export const safeUrl = (u?: string) => (u && /^https:\/\//i.test(u.trim()) ? u.trim() : '');
 
 export const fmtDate = (d: Date) =>
-  d.toLocaleDateString('tr-TR', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
+  d.toLocaleDateString('tr-TR', { day: '2-digit', month: '2-digit', year: 'numeric', timeZone: 'UTC' }); // GG.AA.YYYY
 
 export const readingMinutes = (body = '') => Math.max(1, Math.round(body.split(/\s+/).filter(Boolean).length / 190));
 
