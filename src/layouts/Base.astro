@@ -1,8 +1,10 @@
 ---
-import '@fontsource-variable/inter/index.css';
+// Inter 4, optik boyut eksenli: büyük başlıklarda otomatik olarak Inter Display kesimi kullanılır.
+import '@fontsource-variable/inter/opsz.css';
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import { S } from '../lib';
 
 interface Props {
   title?: string;
@@ -11,7 +13,6 @@ interface Props {
   type?: 'website' | 'article';
   published?: Date;
   noindex?: boolean;
-  dark?: boolean;
   home?: boolean;
   bodyClass?: string;
 }
@@ -23,11 +24,12 @@ const {
   type = 'website',
   published,
   noindex = false,
-  dark = false,
   home = false,
   bodyClass = '',
 } = Astro.props;
-const bodyClasses = [home && 'home', dark && 'dark', bodyClass].filter(Boolean).join(' ') || undefined;
+const SIZE: Record<string, string> = { kucuk: 'size-s', orta: '', buyuk: 'size-l' };
+const sizeClass = SIZE[(S as Record<string, any>).logoSize] ?? '';
+const bodyClasses = [home && 'home', sizeClass, bodyClass].filter(Boolean).join(' ') || undefined;
 const fullTitle = title ? `${title} · ${SITE}` : SITE;
 const cleanPath = Astro.url.pathname.replace(/(\/index)?\.html$/, '').replace(/\/$/, '') || '/';
 const canonical = new URL(cleanPath, Astro.site).toString();
@@ -43,7 +45,7 @@ const ogImage = new URL(image, Astro.site).toString();
     <link rel="canonical" href={canonical} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <meta name="theme-color" content={dark ? '#000000' : '#ffffff'} />
+    <meta name="theme-color" content="#000000" />
     {noindex && <meta name="robots" content="noindex" />}
     <link rel="alternate" type="application/rss+xml" title="Erdur Group Yazıları" href="/rss.xml" />
     <meta property="og:site_name" content={SITE} />
@@ -62,5 +64,6 @@ const ogImage = new URL(image, Astro.site).toString();
     <Header home={home} />
     <main id="icerik"><slot /></main>
     <Footer />
+    <script is:inline src="/header-scroll.js" defer></script>
   </body>
 </html>

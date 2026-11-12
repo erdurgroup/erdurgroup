@@ -12,10 +12,10 @@ export const readingMinutes = (body = '') => Math.max(1, Math.round(body.split(/
 export const socials = () =>
   (
     [
-      ['Instagram', S.social.instagram],
-      ['Facebook', S.social.facebook],
-      ['YouTube', S.social.youtube],
-      ['TikTok', S.social.tiktok],
+      ['instagram', S.social.instagram],
+      ['facebook', S.social.facebook],
+      ['youtube', S.social.youtube],
+      ['tiktok', S.social.tiktok],
     ] as const
   )
     .map(([name, url]) => ({ name, url: safeUrl(url) }))

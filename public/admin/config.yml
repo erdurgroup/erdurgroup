@@ -62,12 +62,6 @@ collections:
             options: [{ label: Küçük, value: kucuk }, { label: Orta, value: orta }, { label: Büyük, value: buyuk }]
             default: orta
             required: false
-          - label: Ana sayfa rengi
-            name: theme
-            widget: select
-            options: [{ label: Siyah zemin / beyaz yazı, value: siyah }, { label: Beyaz zemin / siyah yazı, value: beyaz }]
-            default: siyah
-            required: false
           - { label: Logo hareketli olsun (fare ve kaydırma), name: motion, widget: boolean, default: true, required: false }
           - { label: Logo altı küçük yazı, name: heroKicker, widget: string, required: false }
           - { label: Ana sayfa başlığı, name: heroTitle, widget: string, required: false }
@@ -81,6 +75,7 @@ collections:
               - { label: E-posta, name: email, widget: string, required: false }
               - { label: Adres, name: address, widget: string, required: false }
               - { label: Harita bağlantısı, name: mapsUrl, widget: string, required: false }
+              - { label: Haritada gösterilecek işletme (ad ve adres; boş bırakılırsa harita gizlenir), name: mapsQuery, widget: string, required: false }
           - label: Sosyal medya (tam bağlantı, boş bırakılan görünmez)
             name: social
             widget: object

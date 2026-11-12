@@ -9,7 +9,7 @@ const posts = (await getCollection('yazilar', (p) => !p.data.draft)).sort(
 ---
 <Base title="Yazılar" description="Erdur Group yazıları: tarım, sulama ve tarım makineleri üzerine.">
   <div class="wrap">
-    <div class="page-top"><h1 class="display">Yazılar</h1></div>
+    <div class="page-top"><h1 class="display">yazılar</h1></div>
     {posts.length === 0 ? (
       <p class="empty">Henüz yazı yok.</p>
     ) : (

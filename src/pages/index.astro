@@ -6,37 +6,36 @@ import { S, fmtDate } from '../lib';
 
 const home = S as Record<string, any>;
 const POS: Record<string, string> = { orta: '', sol: 'pos-left', 'sol-ust': 'pos-topleft' };
-const SIZE: Record<string, string> = { kucuk: 'size-s', orta: '', buyuk: 'size-l' };
-const dark = home.theme !== 'beyaz';
-const bodyClass = [POS[home.logoPosition] ?? '', SIZE[home.logoSize] ?? '', home.motion === false ? 'no-motion' : ''].filter(Boolean).join(' ');
-const kicker = home.heroKicker || 'Konya · Emirgazi';
-const title = home.heroTitle || 'Toprağın, suyun ve emeğin ortak adı.';
-const text =
-  home.heroText ||
-  'Erdur Group; tarım, sulama ve tarım makineleri alanında sahadan öğrendiği bilgiyi, güveni ve işçiliği tek çatı altında toplar.';
+const bodyClass = [POS[home.logoPosition] ?? '', home.motion === false ? 'no-motion' : ''].filter(Boolean).join(' ');
+// Boş bırakılırsa gösterilmez (Site Ayarları'ndan doldurulursa görünür).
+const kicker = home.heroKicker || '';
+const title = home.heroTitle || '';
+const text = home.heroText || '';
 
 const posts = (await getCollection('yazilar', (p) => !p.data.draft))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
   .slice(0, 3);
 ---
-<Base home dark={dark} bodyClass={bodyClass}>
+<Base home bodyClass={bodyClass}>
   <section class="hero wrap">
     <h1 class="sr-only">Erdur Group</h1>
     <div class="stage rise">
       <div class="tilt"><Logo link={false} /></div>
     </div>
-    <p class="kicker">{kicker}</p>
+    {kicker && <p class="kicker">{kicker}</p>}
   </section>
 
-  <section class="intro wrap">
-    <h2 class="intro-title">{title}</h2>
-    <p class="intro-text">{text}</p>
-  </section>
+  {text && (
+    <section class="intro wrap">
+      {title && <h2 class="intro-title">{title}</h2>}
+      <p class="intro-text">{text}</p>
+    </section>
+  )}
 
   {posts.length > 0 && (
     <section class="latest wrap" aria-labelledby="son-yazilar">
       <div class="section-head">
-        <h2 id="son-yazilar">Son yazılar</h2>
+        <h2 id="son-yazilar">son yazılar</h2>
         <a href="/yazilar">tümü →</a>
       </div>
       <ul class="post-list">
@@ -53,7 +52,7 @@ const posts = (await getCollection('yazilar', (p) => !p.data.draft))
   )}
 
   <section class="cta wrap">
-    <a class="cta-link" href="/iletisim">Bizimle iletişime geçin <span aria-hidden="true">→</span></a>
+    <a class="cta-link" href="/iletisim">bizimle iletişime geçin <span aria-hidden="true">→</span></a>
   </section>
   <script is:inline src="/logo-motion.js" defer></script>
 </Base>

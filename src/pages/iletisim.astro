@@ -4,17 +4,20 @@ import { S, socials, waLink, telLink, safeUrl } from '../lib';
 const wa = waLink();
 const tel = telLink();
 const maps = safeUrl(S.contact.mapsUrl);
+const mapsQuery = ((S.contact as Record<string, any>).mapsQuery || '').trim();
+const mapEmbed = mapsQuery ? `https://www.google.com/maps?q=${encodeURIComponent(mapsQuery)}&hl=tr&z=16&output=embed` : '';
+const mapOpen = maps || (mapsQuery ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapsQuery)}` : '');
 const rows = [
-  wa && { k: 'WhatsApp', v: 'Yaz', href: wa, ext: true },
-  tel && { k: 'Telefon', v: S.contact.phone, href: tel },
-  S.contact.email && { k: 'E-posta', v: S.contact.email, href: `mailto:${S.contact.email}` },
-  ...socials().map((s) => ({ k: s.name, v: 'Takip et', href: s.url, ext: true })),
-  S.contact.address && { k: 'Adres', v: S.contact.address, href: maps || '', ext: !!maps },
+  wa && { k: 'whatsapp', v: 'yaz', href: wa, ext: true },
+  tel && { k: 'telefon', v: S.contact.phone, href: tel },
+  S.contact.email && { k: 'e-posta', v: S.contact.email, href: `mailto:${S.contact.email}` },
+  ...socials().map((s) => ({ k: s.name, v: 'takip et', href: s.url, ext: true })),
+  S.contact.address && { k: 'adres', v: S.contact.address, href: maps || '', ext: !!maps },
 ].filter(Boolean);
 ---
 <Base title="İletişim" description="Erdur Group ile iletişime geçin.">
   <div class="wrap">
-    <div class="page-top"><h1 class="display">Bizimle iletişime geçin</h1></div>
+    <div class="page-top"><h1 class="display">bizimle iletişime geçin</h1></div>
     <ul class="links">
       {rows.map((r) => (
         <li>
@@ -28,5 +31,22 @@ const rows = [
         </li>
       ))}
     </ul>
+
+    {mapEmbed && (
+      <section class="map" aria-label="Haritada konumumuz">
+        <div class="map-frame">
+          <iframe
+            src={mapEmbed}
+            title={`Google Haritalar: ${mapsQuery}`}
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            allowfullscreen
+          ></iframe>
+        </div>
+        {mapOpen && (
+          <a class="map-open" href={mapOpen} target="_blank" rel="noopener noreferrer">google haritalar'da aç / yol tarifi al <span aria-hidden="true">↗</span></a>
+        )}
+      </section>
+    )}
   </div>
 </Base>
