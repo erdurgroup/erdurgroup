@@ -61,6 +61,12 @@ body:not(.home) main { padding-top: var(--head-h); }
 .nav { display: flex; gap: clamp(1.25rem, 3vw, 2.25rem); margin-left: auto; font-weight: 600; letter-spacing: -0.01em; }
 .nav a { text-decoration: none; padding-block: .25rem; border-bottom: 2px solid transparent; }
 .nav a:hover, .nav a[aria-current='page'] { border-color: var(--fg); }
+/* Telefon: menü logonun sağında alt alta; kaydırınca (küçük header) tek satıra döner. */
+@media (max-width: 40rem) {
+  .nav { flex-direction: column; align-items: flex-end; gap: .2rem; font-size: 1rem; text-align: right; }
+  .nav a { padding-block: .05rem; line-height: 1.35; }
+  .scrolled .nav { flex-direction: row; align-items: center; gap: 1rem; font-size: .9rem; }
+}
 
 /* Logo */
 .logo { display: inline-flex; line-height: 0; text-decoration: none; }
