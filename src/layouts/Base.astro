@@ -12,6 +12,8 @@ interface Props {
   published?: Date;
   noindex?: boolean;
   dark?: boolean;
+  home?: boolean;
+  bodyClass?: string;
 }
 const SITE = 'Erdur Group';
 const {
@@ -22,7 +24,10 @@ const {
   published,
   noindex = false,
   dark = false,
+  home = false,
+  bodyClass = '',
 } = Astro.props;
+const bodyClasses = [home && 'home', dark && 'dark', bodyClass].filter(Boolean).join(' ') || undefined;
 const fullTitle = title ? `${title} · ${SITE}` : SITE;
 const cleanPath = Astro.url.pathname.replace(/(\/index)?\.html$/, '').replace(/\/$/, '') || '/';
 const canonical = new URL(cleanPath, Astro.site).toString();
@@ -52,9 +57,9 @@ const ogImage = new URL(image, Astro.site).toString();
     <meta name="twitter:card" content="summary_large_image" />
     <slot name="head" />
   </head>
-  <body class={dark ? 'dark' : undefined}>
+  <body class={bodyClasses}>
     <a class="skip" href="#icerik">İçeriğe geç</a>
-    <Header home={dark} />
+    <Header home={home} />
     <main id="icerik"><slot /></main>
     <Footer />
   </body>

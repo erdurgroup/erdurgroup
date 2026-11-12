@@ -50,6 +50,25 @@ collections:
         label: Ana sayfa, iletişim ve sosyal medya
         file: src/data/site.json
         fields:
+          - label: Logo konumu
+            name: logoPosition
+            widget: select
+            options: [{ label: Ortada, value: orta }, { label: Solda (ortada), value: sol }, { label: Sol üstte, value: sol-ust }]
+            default: orta
+            required: false
+          - label: Logo boyutu
+            name: logoSize
+            widget: select
+            options: [{ label: Küçük, value: kucuk }, { label: Orta, value: orta }, { label: Büyük, value: buyuk }]
+            default: orta
+            required: false
+          - label: Ana sayfa rengi
+            name: theme
+            widget: select
+            options: [{ label: Siyah zemin / beyaz yazı, value: siyah }, { label: Beyaz zemin / siyah yazı, value: beyaz }]
+            default: siyah
+            required: false
+          - { label: Logo hareketli olsun (fare ve kaydırma), name: motion, widget: boolean, default: true, required: false }
           - { label: Logo altı küçük yazı, name: heroKicker, widget: string, required: false }
           - { label: Ana sayfa başlığı, name: heroTitle, widget: string, required: false }
           - { label: Ana sayfa kısa metin, name: heroText, widget: text, required: false }

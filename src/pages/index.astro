@@ -5,6 +5,10 @@ import Logo from '../components/Logo.astro';
 import { S, fmtDate } from '../lib';
 
 const home = S as Record<string, any>;
+const POS: Record<string, string> = { orta: '', sol: 'pos-left', 'sol-ust': 'pos-topleft' };
+const SIZE: Record<string, string> = { kucuk: 'size-s', orta: '', buyuk: 'size-l' };
+const dark = home.theme !== 'beyaz';
+const bodyClass = [POS[home.logoPosition] ?? '', SIZE[home.logoSize] ?? '', home.motion === false ? 'no-motion' : ''].filter(Boolean).join(' ');
 const kicker = home.heroKicker || 'Konya · Emirgazi';
 const title = home.heroTitle || 'Toprağın, suyun ve emeğin ortak adı.';
 const text =
@@ -15,7 +19,7 @@ const posts = (await getCollection('yazilar', (p) => !p.data.draft))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
   .slice(0, 3);
 ---
-<Base dark>
+<Base home dark={dark} bodyClass={bodyClass}>
   <section class="hero wrap">
     <h1 class="sr-only">Erdur Group</h1>
     <div class="stage rise">

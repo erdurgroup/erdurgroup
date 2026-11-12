@@ -1,7 +1,7 @@
 /* Ana sayfa logosu: fareyle eğilir, kaydırınca küçülüp başlığa taşınır. */
 (function () {
   var hero = document.querySelector('.hero');
-  if (!hero || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (!hero || document.body.classList.contains('no-motion') || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
   var root = document.documentElement;
   var clamp = function (v, a, b) { return Math.min(b, Math.max(a, v)); };
