@@ -122,7 +122,7 @@ body.scrolled:not(.home) .site-header .logo-svg { width: var(--logo-compact); }
 .pos-left .tilt, .pos-topleft .tilt { transform-origin: left center; }
 
 /* Alt bilgi */
-.site-footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .5rem 2rem; padding-block: 1.5rem 2rem; font-size: .875rem; color: var(--muted); }
+.site-footer .wrap { display: flex; flex-wrap: wrap; justify-content: center; text-align: center; gap: .5rem 2rem; padding-block: 1.5rem 2rem; font-size: .875rem; color: var(--muted); }
 
 /* Sayfa başlığı */
 .page-top { padding-block: clamp(3rem, 9vw, 7rem) clamp(2rem, 5vw, 3.5rem); }
