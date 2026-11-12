@@ -6,6 +6,7 @@ date: 2026-11-10
 category: Sulama
 draft: false
 ---
-# Lan davut gavatı. adam olcan. \
-\
+# Lan davut gavatı. adam olcan
+
+
 ## Özür dile lan.
