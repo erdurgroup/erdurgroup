@@ -4,8 +4,15 @@
   function update() {
     ticking = false;
     var y = window.scrollY;
-    b.classList.toggle('scrolled', y > 8);
-    if (hero) b.classList.toggle('past-hero', y > hero.offsetTop + hero.offsetHeight * 0.55);
+    var compact = y > 8;
+    if (hero) {
+      var at = hero.offsetTop + hero.offsetHeight * 0.55;
+      var maxY = document.documentElement.scrollHeight - window.innerHeight;
+      // Sayfa kısaysa (az yazı) büyük logo hiç kaybolamaz: header'ı da hiç küçültme, sade kalsın.
+      if (maxY < at) compact = false;
+      b.classList.toggle('past-hero', compact && y > at);
+    }
+    b.classList.toggle('scrolled', compact);
   }
   function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
   window.addEventListener('scroll', onScroll, { passive: true });
