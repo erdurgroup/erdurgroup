@@ -1,40 +1,14 @@
 ---
-import Logo from './Logo.astro';
-import { S, socials, waLink, telLink } from '../lib';
-const soc = socials();
-const wa = waLink();
-const tel = telLink();
+import { S, socials } from '../lib';
 const year = new Date().getFullYear();
+const soc = socials();
 ---
 <footer class="site-footer">
   <div class="wrap">
-    <div class="foot-grid">
-      <div>
-        <Logo />
-        <p class="foot-note">Tarım, sulama ve tarım makineleri. {S.contact.address}.</p>
-      </div>
-      <div>
-        <h4>Sayfalar</h4>
-        <ul>
-          <li><a href="/markalar">Markalar</a></li>
-          <li><a href="/yazilar">Yazılar</a></li>
-          <li><a href="/iletisim">İletişim</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Bağlantılar</h4>
-        <ul>
-          {soc.map((s) => <li><a href={s.url} rel="noopener noreferrer me" target="_blank">{s.name} ↗</a></li>)}
-          {wa && <li><a href={wa} rel="noopener noreferrer" target="_blank">WhatsApp ↗</a></li>}
-          {tel && <li><a href={tel}>{S.contact.phone}</a></li>}
-          {S.contact.email && <li><a href={`mailto:${S.contact.email}`}>{S.contact.email}</a></li>}
-          {soc.length === 0 && !wa && !tel && !S.contact.email && <li><a href="/iletisim">İletişim bilgileri</a></li>}
-        </ul>
-      </div>
-    </div>
-    <div class="legal">
-      <span>© {year} Erdur Group. Tüm hakları saklıdır.</span>
-      <span>{S.contact.address}</span>
-    </div>
+    <span>© {year} Erdur Group</span>
+    <nav aria-label="Bağlantılar">
+      {soc.map((s) => <a href={s.url} rel="noopener noreferrer me" target="_blank">{s.name}</a>)}
+      {S.contact.email && <a href={`mailto:${S.contact.email}`}>E-posta</a>}
+    </nav>
   </div>
 </footer>

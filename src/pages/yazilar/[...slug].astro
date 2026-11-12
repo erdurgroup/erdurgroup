@@ -1,7 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
-import { fmtDate, readingMinutes } from '../../lib';
+import { fmtDate } from '../../lib';
 
 export async function getStaticPaths() {
   const posts = await getCollection('yazilar', (p) => !p.data.draft);
@@ -28,10 +28,9 @@ const ld = {
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(ld).replace(/</g, '\\u003c')} />
   <article class="wrap">
     <div class="article-head">
-      <a class="back" href="/yazilar">← Tüm yazılar</a>
-      <span class="eyebrow">{d.category} · {fmtDate(d.date)} · {readingMinutes(post.body)} dk okuma</span>
+      <a class="back" href="/yazilar">← yazılar</a>
+      <time datetime={d.date.toISOString().slice(0, 10)}>{fmtDate(d.date)}</time>
       <h1>{d.title}</h1>
-      <p class="lede">{d.description}</p>
     </div>
     {d.cover && <img class="article-cover" src={d.cover} alt={d.coverAlt || ''} decoding="async" />}
     <div class="prose"><Content /></div>

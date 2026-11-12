@@ -1,78 +1,10 @@
 ---
-import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
-import Brands from '../components/Brands.astro';
-import PostCard from '../components/PostCard.astro';
-import { S, socials, waLink } from '../lib';
-
-const posts = (await getCollection('yazilar', (p) => !p.data.draft))
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0, 3);
-const soc = socials();
-const wa = waLink();
+import Logo from '../components/Logo.astro';
 ---
-<Base>
-  <section class="hero">
-    <div class="wrap">
-      <span class="eyebrow rise">{S.heroKicker}</span>
-      <h1 class="display rise d1">{S.heroTitle}</h1>
-      <p class="lede rise d2">{S.heroText}</p>
-      <div class="hero-actions rise d3">
-        <a class="link" href="/yazilar">Yazıları oku <span class="arrow">→</span></a>
-        <a class="link" href="/iletisim">İletişime geç <span class="arrow">→</span></a>
-      </div>
-    </div>
-  </section>
-
-  <section class="manifesto">
-    <div class="wrap">
-      <span class="eyebrow">Duruşumuz</span>
-      <h2 class="h2">{S.manifestoTitle}</h2>
-      <p>{S.manifesto}</p>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="wrap">
-      <div class="section-head">
-        <div>
-          <span class="eyebrow">Markalarımız</span>
-          <h2 class="h2">Üç alan, tek çatı.</h2>
-        </div>
-        <a class="link" href="/markalar">Tümü <span class="arrow">→</span></a>
-      </div>
-      <Brands />
-    </div>
-  </section>
-
-  {posts.length > 0 && (
-    <section class="section flush-top">
-      <div class="wrap">
-        <div class="section-head">
-          <div>
-            <span class="eyebrow">Bilgi odası</span>
-            <h2 class="h2">Son yazılar</h2>
-          </div>
-          <a class="link" href="/yazilar">Tüm yazılar <span class="arrow">→</span></a>
-        </div>
-        <div class="posts">{posts.map((p) => <PostCard post={p} />)}</div>
-      </div>
-    </section>
-  )}
-
-  <section class="section flush-top">
-    <div class="wrap">
-      <div class="section-head cta-head">
-        <div>
-          <span class="eyebrow">İletişim</span>
-          <h2 class="h2">Konuşalım.</h2>
-        </div>
-        <div class="hero-actions cta-actions">
-          {wa && <a class="btn" href={wa} rel="noopener noreferrer" target="_blank">WhatsApp</a>}
-          {soc.map((s) => <a class="link" href={s.url} rel="noopener noreferrer me" target="_blank">{s.name} <span class="arrow">↗</span></a>)}
-          {!wa && soc.length === 0 && <a class="btn" href="/iletisim">İletişim</a>}
-        </div>
-      </div>
-    </div>
+<Base dark>
+  <section class="hero wrap">
+    <h1 class="sr-only">Erdur Group</h1>
+    <div class="rise"><Logo link={false} /></div>
   </section>
 </Base>

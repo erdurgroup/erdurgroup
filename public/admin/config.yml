@@ -36,13 +36,8 @@ collections:
     sortable_fields: ['date', 'title']
     fields:
       - { label: Başlık, name: title, widget: string }
-      - { label: Kısa özet (listede ve Google'da görünür, 1-2 cümle), name: description, widget: text }
+      - { label: Kısa özet (Google'da ve paylaşımlarda görünür, 1-2 cümle), name: description, widget: text }
       - { label: Yayın tarihi, name: date, widget: datetime, format: 'YYYY-MM-DD', date_format: 'DD.MM.YYYY', time_format: false }
-      - label: Kategori
-        name: category
-        widget: select
-        options: [Tarım, Sulama, Tarım Makineleri, Duyuru]
-        default: Tarım
       - { label: Kapak görseli, name: cover, widget: image, required: false }
       - { label: Kapak görseli açıklaması, name: coverAlt, widget: string, required: false }
       - { label: Taslak (işaretliysa sitede görünmez), name: draft, widget: boolean, default: false }
@@ -52,23 +47,9 @@ collections:
     label: Site Ayarları
     files:
       - name: site
-        label: Ana sayfa, iletişim ve sosyal medya
+        label: İletişim ve sosyal medya
         file: src/data/site.json
         fields:
-          - { label: Ana sayfa küçük üst yazı, name: heroKicker, widget: string }
-          - { label: Ana sayfa büyük başlık, name: heroTitle, widget: string }
-          - { label: Ana sayfa alt metin, name: heroText, widget: text }
-          - { label: Duruş başlığı, name: manifestoTitle, widget: string }
-          - { label: Duruş metni, name: manifesto, widget: text }
-          - label: Markalar
-            name: brands
-            widget: list
-            summary: '{{fields.name}}'
-            fields:
-              - { label: Marka adı, name: name, widget: string }
-              - { label: Slogan, name: tagline, widget: string }
-              - { label: Açıklama, name: text, widget: text }
-              - { label: Bağlantı (varsa, https:// ile), name: url, widget: string, required: false }
           - label: İletişim
             name: contact
             widget: object

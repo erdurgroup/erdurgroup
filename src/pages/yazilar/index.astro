@@ -7,32 +7,22 @@ const posts = (await getCollection('yazilar', (p) => !p.data.draft)).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
 );
 ---
-<Base title="Yazılar" description="Tarım, sulama ve tarım makineleri üzerine sahadan öğrendiklerimiz.">
-  <section class="page-top">
-    <div class="wrap">
-      <span class="eyebrow">Bilgi odası</span>
-      <h1 class="display">Yazılar</h1>
-    </div>
-  </section>
-  <section class="section">
-    <div class="wrap">
-      {posts.length === 0 ? (
-        <p class="empty">Henüz yazı yok.</p>
-      ) : (
-        <ul class="post-list">
-          {posts.map((p) => (
-            <li>
-              <a class="post-row" href={`/yazilar/${p.id}`}>
-                <div class="meta">{p.data.category}<br />{fmtDate(p.data.date)}</div>
-                <div>
-                  <h2>{p.data.title}</h2>
-                  <p>{p.data.description}</p>
-                </div>
-              </a>
-            </li>
-          ))}
-        </ul>
-      )}
-    </div>
-  </section>
+<Base title="Yazılar" description="Erdur Group yazıları: tarım, sulama ve tarım makineleri üzerine.">
+  <div class="wrap">
+    <div class="page-top"><h1 class="display">Yazılar</h1></div>
+    {posts.length === 0 ? (
+      <p class="empty">Henüz yazı yok.</p>
+    ) : (
+      <ul class="post-list">
+        {posts.map((p) => (
+          <li>
+            <a class="post-row" href={`/yazilar/${p.id}`}>
+              <time datetime={p.data.date.toISOString().slice(0, 10)}>{fmtDate(p.data.date)}</time>
+              <h2>{p.data.title}</h2>
+            </a>
+          </li>
+        ))}
+      </ul>
+    )}
+  </div>
 </Base>

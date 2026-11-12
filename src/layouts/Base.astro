@@ -1,6 +1,4 @@
 ---
-import '@fontsource-variable/fraunces/index.css';
-import '@fontsource-variable/fraunces/standard-italic.css';
 import '@fontsource-variable/inter/index.css';
 import '../styles/global.css';
 import Header from '../components/Header.astro';
@@ -13,17 +11,19 @@ interface Props {
   type?: 'website' | 'article';
   published?: Date;
   noindex?: boolean;
+  dark?: boolean;
 }
 const SITE = 'Erdur Group';
 const {
   title,
-  description = 'Erdur Group: tarım, sulama ve tarım makineleri alanında bilgi, güven ve işçilik. Emirgazi, Konya.',
+  description = 'Erdur Group: tarım, sulama ve tarım makineleri. Emirgazi, Konya.',
   image = '/og-default.png',
   type = 'website',
   published,
   noindex = false,
+  dark = false,
 } = Astro.props;
-const fullTitle = title ? `${title} · ${SITE}` : `${SITE} · Toprağın, suyun ve emeğin ortak adı`;
+const fullTitle = title ? `${title} · ${SITE}` : SITE;
 const cleanPath = Astro.url.pathname.replace(/(\/index)?\.html$/, '').replace(/\/$/, '') || '/';
 const canonical = new URL(cleanPath, Astro.site).toString();
 const ogImage = new URL(image, Astro.site).toString();
@@ -38,7 +38,7 @@ const ogImage = new URL(image, Astro.site).toString();
     <link rel="canonical" href={canonical} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <meta name="theme-color" content="#1b2e22" />
+    <meta name="theme-color" content={dark ? '#000000' : '#ffffff'} />
     {noindex && <meta name="robots" content="noindex" />}
     <link rel="alternate" type="application/rss+xml" title="Erdur Group Yazıları" href="/rss.xml" />
     <meta property="og:site_name" content={SITE} />
@@ -52,9 +52,9 @@ const ogImage = new URL(image, Astro.site).toString();
     <meta name="twitter:card" content="summary_large_image" />
     <slot name="head" />
   </head>
-  <body>
+  <body class={dark ? 'dark' : undefined}>
     <a class="skip" href="#icerik">İçeriğe geç</a>
-    <Header />
+    <Header home={dark} />
     <main id="icerik"><slot /></main>
     <Footer />
   </body>
