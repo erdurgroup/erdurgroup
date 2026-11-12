@@ -1,10 +1,55 @@
 ---
+import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Logo from '../components/Logo.astro';
+import { S, fmtDate } from '../lib';
+
+const home = S as Record<string, any>;
+const kicker = home.heroKicker || 'Konya · Emirgazi';
+const title = home.heroTitle || 'Toprağın, suyun ve emeğin ortak adı.';
+const text =
+  home.heroText ||
+  'Erdur Group; tarım, sulama ve tarım makineleri alanında sahadan öğrendiği bilgiyi, güveni ve işçiliği tek çatı altında toplar.';
+
+const posts = (await getCollection('yazilar', (p) => !p.data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
 ---
 <Base dark>
   <section class="hero wrap">
     <h1 class="sr-only">Erdur Group</h1>
-    <div class="rise"><Logo link={false} /></div>
+    <div class="stage rise">
+      <div class="tilt"><Logo link={false} /></div>
+    </div>
+    <p class="kicker">{kicker}</p>
   </section>
+
+  <section class="intro wrap">
+    <h2 class="intro-title">{title}</h2>
+    <p class="intro-text">{text}</p>
+  </section>
+
+  {posts.length > 0 && (
+    <section class="latest wrap" aria-labelledby="son-yazilar">
+      <div class="section-head">
+        <h2 id="son-yazilar">Son yazılar</h2>
+        <a href="/yazilar">tümü →</a>
+      </div>
+      <ul class="post-list">
+        {posts.map((p) => (
+          <li>
+            <a class="post-row" href={`/yazilar/${p.id}`}>
+              <time datetime={p.data.date.toISOString().slice(0, 10)}>{fmtDate(p.data.date)}</time>
+              <h3>{p.data.title}</h3>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )}
+
+  <section class="cta wrap">
+    <a class="cta-link" href="/iletisim">Bizimle iletişime geçin <span aria-hidden="true">→</span></a>
+  </section>
+  <script is:inline src="/logo-motion.js" defer></script>
 </Base>

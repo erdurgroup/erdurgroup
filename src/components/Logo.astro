@@ -1,9 +1,9 @@
 ---
 import { LOGO_D, LOGO_VIEWBOX } from '../logo-path';
-const { label = 'Erdur Group ana sayfa', link = true } = Astro.props;
+const { label = 'Erdur Group ana sayfa', link = true, extra = '' } = Astro.props;
 ---
 {link ? (
-  <a href="/" class="logo" aria-label={label}>
+  <a href="/" class={`logo ${extra}`.trim()} aria-label={label}>
     <svg class="logo-svg" viewBox={LOGO_VIEWBOX} aria-hidden="true" focusable="false" fill="currentColor" fill-rule="evenodd"><path d={LOGO_D}></path></svg>
   </a>
 ) : (
