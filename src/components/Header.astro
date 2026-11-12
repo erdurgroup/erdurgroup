@@ -1,0 +1,19 @@
+---
+import Logo from './Logo.astro';
+const path = Astro.url.pathname.replace(/(\/index)?\.html$/, '').replace(/\/$/, '');
+const items = [
+  { href: '/markalar', label: 'Markalar' },
+  { href: '/yazilar', label: 'Yazılar' },
+  { href: '/iletisim', label: 'İletişim' },
+];
+---
+<header class="site-header">
+  <div class="wrap">
+    <Logo />
+    <nav class="nav" aria-label="Ana menü">
+      {items.map((i) => (
+        <a href={i.href} aria-current={path === i.href || path.startsWith(i.href + '/') ? 'page' : undefined}>{i.label}</a>
+      ))}
+    </nav>
+  </div>
+</header>

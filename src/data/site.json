@@ -1,0 +1,40 @@
+{
+  "heroKicker": "Konya · Emirgazi",
+  "heroTitle": "Toprağın, suyun ve emeğin ortak adı.",
+  "heroText": "Erdur Group; tarım, sulama ve tarım makineleri alanında sahadan öğrendiği bilgiyi, güveni ve işçiliği tek çatı altında toplar.",
+  "manifestoTitle": "Doğru bilgiyle yapılan iş, mevsimlerden uzun yaşar.",
+  "manifesto": "Burası bir katalog değil, bir bilgi odası. Tarımda ve sulamada sahada işe yarayan ne varsa, sade ve açık bir dille burada paylaşıyoruz.",
+  "brands": [
+    {
+      "name": "Erdur Ziraat",
+      "tagline": "Üretimin bilgisi",
+      "text": "Tarımsal üretimde planlama, bilgi ve saha deneyimi.",
+      "url": ""
+    },
+    {
+      "name": "Erdur Sulama Sistemleri & Hırdavat",
+      "tagline": "Suyun doğru yolu",
+      "text": "Sulama sistemleri, hırdavat ve yapı malzemeleri.",
+      "url": ""
+    },
+    {
+      "name": "Erdur Tarım Makineleri",
+      "tagline": "Sahanın gücü",
+      "text": "Tarım makineleri ve ekipmanları.",
+      "url": ""
+    }
+  ],
+  "contact": {
+    "phone": "",
+    "whatsapp": "",
+    "email": "",
+    "address": "Emirgazi, Konya",
+    "mapsUrl": ""
+  },
+  "social": {
+    "instagram": "",
+    "facebook": "",
+    "youtube": "",
+    "tiktok": ""
+  }
+}

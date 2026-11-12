@@ -1,0 +1,21 @@
+---
+import { S, safeUrl } from '../lib';
+---
+<ol class="brands">
+  {S.brands.map((b, i) => {
+    const url = safeUrl(b.url);
+    return (
+      <li class="brand">
+        <span class="brand-n">{String(i + 1).padStart(2, '0')}</span>
+        <div>
+          <h3>{b.name}</h3>
+          <div class="tag">{b.tagline}</div>
+        </div>
+        <div class="body">
+          <p>{b.text}</p>
+          {url && <p><a class="link" href={url} rel="noopener noreferrer" target="_blank">Ziyaret et <span class="arrow">→</span></a></p>}
+        </div>
+      </li>
+    );
+  })}
+</ol>

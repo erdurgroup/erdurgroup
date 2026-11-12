@@ -1,0 +1,42 @@
+---
+import Base from '../layouts/Base.astro';
+import { S, socials, waLink, telLink, safeUrl } from '../lib';
+const soc = socials();
+const wa = waLink();
+const tel = telLink();
+const maps = safeUrl(S.contact.mapsUrl);
+---
+<Base title="İletişim" description="Erdur Group ile iletişime geçin: WhatsApp, telefon, e-posta ve sosyal medya hesaplarımız.">
+  <section class="page-top">
+    <div class="wrap">
+      <span class="eyebrow">İletişim</span>
+      <h1 class="display">Bize ulaşın.</h1>
+      <p class="lede lede-gap">Sorularınız, önerileriniz ve iş birliği talepleriniz için en hızlı yol WhatsApp ya da telefon.</p>
+      {wa && <p class="lede-gap"><a class="btn" href={wa} rel="noopener noreferrer" target="_blank">WhatsApp ile yaz <span class="arrow">→</span></a></p>}
+    </div>
+  </section>
+  <section class="section">
+    <div class="wrap contact-grid">
+      <div>
+        <span class="eyebrow">Doğrudan</span>
+        <ul class="contact-list">
+          {tel && <li><span class="k">Telefon</span><a href={tel}>{S.contact.phone}</a></li>}
+          {S.contact.email && <li><span class="k">E-posta</span><a href={`mailto:${S.contact.email}`}>{S.contact.email}</a></li>}
+          {S.contact.address && (
+            <li>
+              <span class="k">Adres</span>
+              {maps ? <a href={maps} rel="noopener noreferrer" target="_blank">{S.contact.address} ↗</a> : <span>{S.contact.address}</span>}
+            </li>
+          )}
+        </ul>
+      </div>
+      <div>
+        <span class="eyebrow">Sosyal medya</span>
+        <ul class="contact-list">
+          {soc.map((s) => <li><span class="k">{s.name}</span><a href={s.url} rel="noopener noreferrer me" target="_blank">Takip et ↗</a></li>)}
+          {soc.length === 0 && <li><span class="k">Yakında</span><span>Hesaplarımız çok yakında burada.</span></li>}
+        </ul>
+      </div>
+    </div>
+  </section>
+</Base>

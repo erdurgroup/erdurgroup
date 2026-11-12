@@ -1,0 +1,11 @@
+---
+import { fmtDate } from '../lib';
+const { post } = Astro.props;
+const d = post.data;
+---
+<a class="post-card" href={`/yazilar/${post.id}`}>
+  <div class="meta"><span>{d.category}</span><span>{fmtDate(d.date)}</span></div>
+  {d.cover && <img class="thumb" src={d.cover} alt={d.coverAlt || ''} loading="lazy" decoding="async" />}
+  <h3>{d.title}</h3>
+  <p>{d.description}</p>
+</a>

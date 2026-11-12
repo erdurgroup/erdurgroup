@@ -1,0 +1,27 @@
+{
+  "name": "erdurgroup",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "npm run cms:copy && astro dev",
+    "cms:copy": "node scripts/copy-cms.mjs",
+    "build": "npm run cms:copy && astro build",
+    "preview": "astro preview",
+    "deploy": "npm run build && wrangler deploy"
+  },
+  "dependencies": {
+    "@astrojs/rss": "4.0.19",
+    "@astrojs/sitemap": "3.7.4",
+    "@fontsource-variable/fraunces": "5.3.0",
+    "@fontsource-variable/inter": "5.3.0",
+    "astro": "7.4.11",
+    "decap-cms": "3.17.3"
+  },
+  "devDependencies": {
+    "wrangler": "^4.161.0"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  }
+}

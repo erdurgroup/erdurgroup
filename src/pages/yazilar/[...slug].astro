@@ -1,0 +1,39 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { fmtDate, readingMinutes } from '../../lib';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('yazilar', (p) => !p.data.draft);
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const d = post.data;
+const ld = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: d.title,
+  description: d.description,
+  datePublished: d.date.toISOString(),
+  inLanguage: 'tr',
+  author: { '@type': 'Organization', name: 'Erdur Group' },
+  publisher: { '@type': 'Organization', name: 'Erdur Group' },
+  mainEntityOfPage: new URL(`/yazilar/${post.id}`, Astro.site).toString(),
+  ...(d.cover ? { image: new URL(d.cover, Astro.site).toString() } : {}),
+};
+---
+<Base title={d.title} description={d.description} image={d.cover} type="article" published={d.date}>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(ld).replace(/</g, '\\u003c')} />
+  <article class="wrap">
+    <div class="article-head">
+      <a class="back" href="/yazilar">← Tüm yazılar</a>
+      <span class="eyebrow">{d.category} · {fmtDate(d.date)} · {readingMinutes(post.body)} dk okuma</span>
+      <h1>{d.title}</h1>
+      <p class="lede">{d.description}</p>
+    </div>
+    {d.cover && <img class="article-cover" src={d.cover} alt={d.coverAlt || ''} decoding="async" />}
+    <div class="prose"><Content /></div>
+  </article>
+</Base>

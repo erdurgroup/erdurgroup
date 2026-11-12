@@ -1,0 +1,88 @@
+# Erdur Group yönetim paneli (Decap CMS)
+# KURULUMDA DEĞİŞTİRİLECEK: repo satırı → GitHub kullanıcı adı/depo adı
+backend:
+  name: github
+  repo: erdurgroup/erdurgroup
+  branch: main
+  base_url: https://erdurgroup.com
+  auth_endpoint: api/auth
+  commit_messages:
+    create: 'Yeni yazı: {{slug}}'
+    update: 'Güncelleme: {{collection}} / {{slug}}'
+    delete: 'Silindi: {{collection}} / {{slug}}'
+    uploadMedia: 'Görsel yüklendi: {{path}}'
+    deleteMedia: 'Görsel silindi: {{path}}'
+
+locale: tr
+site_url: https://erdurgroup.com
+display_url: https://erdurgroup.com
+logo_url: /favicon.svg
+publish_mode: simple
+media_folder: public/uploads
+public_folder: /uploads
+slug:
+  encoding: ascii
+  clean_accents: true
+
+collections:
+  - name: yazilar
+    label: Yazılar
+    label_singular: Yazı
+    folder: src/content/yazilar
+    extension: md
+    create: true
+    slug: '{{slug}}'
+    summary: '{{title}} · {{date}}'
+    sortable_fields: ['date', 'title']
+    fields:
+      - { label: Başlık, name: title, widget: string }
+      - { label: Kısa özet (listede ve Google'da görünür, 1-2 cümle), name: description, widget: text }
+      - { label: Yayın tarihi, name: date, widget: datetime, format: 'YYYY-MM-DD', date_format: 'DD.MM.YYYY', time_format: false }
+      - label: Kategori
+        name: category
+        widget: select
+        options: [Tarım, Sulama, Tarım Makineleri, Duyuru]
+        default: Tarım
+      - { label: Kapak görseli, name: cover, widget: image, required: false }
+      - { label: Kapak görseli açıklaması, name: coverAlt, widget: string, required: false }
+      - { label: Taslak (işaretliysa sitede görünmez), name: draft, widget: boolean, default: false }
+      - { label: Yazı, name: body, widget: markdown }
+
+  - name: ayarlar
+    label: Site Ayarları
+    files:
+      - name: site
+        label: Ana sayfa, iletişim ve sosyal medya
+        file: src/data/site.json
+        fields:
+          - { label: Ana sayfa küçük üst yazı, name: heroKicker, widget: string }
+          - { label: Ana sayfa büyük başlık, name: heroTitle, widget: string }
+          - { label: Ana sayfa alt metin, name: heroText, widget: text }
+          - { label: Duruş başlığı, name: manifestoTitle, widget: string }
+          - { label: Duruş metni, name: manifesto, widget: text }
+          - label: Markalar
+            name: brands
+            widget: list
+            summary: '{{fields.name}}'
+            fields:
+              - { label: Marka adı, name: name, widget: string }
+              - { label: Slogan, name: tagline, widget: string }
+              - { label: Açıklama, name: text, widget: text }
+              - { label: Bağlantı (varsa, https:// ile), name: url, widget: string, required: false }
+          - label: İletişim
+            name: contact
+            widget: object
+            fields:
+              - { label: Telefon (görünen), name: phone, widget: string, required: false }
+              - { label: WhatsApp numarası (sadece rakam, 905xxxxxxxxx), name: whatsapp, widget: string, required: false }
+              - { label: E-posta, name: email, widget: string, required: false }
+              - { label: Adres, name: address, widget: string, required: false }
+              - { label: Harita bağlantısı, name: mapsUrl, widget: string, required: false }
+          - label: Sosyal medya (tam bağlantı, boş bırakılan görünmez)
+            name: social
+            widget: object
+            fields:
+              - { label: Instagram, name: instagram, widget: string, required: false }
+              - { label: Facebook, name: facebook, widget: string, required: false }
+              - { label: YouTube, name: youtube, widget: string, required: false }
+              - { label: TikTok, name: tiktok, widget: string, required: false }
