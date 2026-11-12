@@ -1,22 +1,9 @@
 ---
 import Logo from './Logo.astro';
 const { home = false } = Astro.props;
-const path = Astro.url.pathname.replace(/(\/index)?\.html$/, '').replace(/\/$/, '');
-const items = [
-  { href: '/', label: 'ana sayfa' },
-  { href: '/yazilar', label: 'yazılar' },
-  { href: '/iletisim', label: 'iletişim' },
-];
-const isCurrent = (href: string) =>
-  href === '/' ? path === '' : path === href || path.startsWith(href + '/');
 ---
 <header class="site-header">
   <div class="wrap">
     <Logo extra={home ? 'header-logo' : ''} />
-    <nav class="nav" aria-label="Ana menü">
-      {items.map((i) => (
-        <a href={i.href} aria-current={isCurrent(i.href) ? 'page' : undefined}>{i.label}</a>
-      ))}
-    </nav>
   </div>
 </header>
