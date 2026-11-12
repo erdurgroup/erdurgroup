@@ -6,13 +6,17 @@ const tel = telLink();
 const maps = safeUrl(S.contact.mapsUrl);
 const mapsQuery = ((S.contact as Record<string, any>).mapsQuery || '').trim();
 const mapEmbed = mapsQuery ? `https://www.google.com/maps?q=${encodeURIComponent(mapsQuery)}&hl=tr&z=16&output=embed` : '';
-const mapOpen = maps || (mapsQuery ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapsQuery)}` : '');
+const mapOpen = mapsQuery ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapsQuery)}` : maps;
+// Adrese tıklayınca işletme adıyla sade bir Google araması açılır.
+const addressSearch = ((S.contact as Record<string, any>).addressSearch || '').trim();
+const addressHref = addressSearch ? `https://www.google.com/search?q=${encodeURIComponent(addressSearch)}` : maps;
+const soc = socials();
 const rows = [
   wa && { k: 'whatsapp', v: 'yaz', href: wa, ext: true },
   tel && { k: 'telefon', v: S.contact.phone, href: tel },
   S.contact.email && { k: 'e-posta', v: S.contact.email, href: `mailto:${S.contact.email}` },
-  ...socials().map((s) => ({ k: s.name, v: 'takip et', href: s.url, ext: true })),
-  S.contact.address && { k: 'adres', v: S.contact.address, href: maps || '', ext: !!maps },
+  soc.length > 0 && { k: 'sosyal medya', social: soc },
+  S.contact.address && { k: 'adres', v: S.contact.address, href: addressHref || '', ext: !!addressHref },
 ].filter(Boolean);
 ---
 <Base title="İletişim" description="Erdur Group ile iletişime geçin.">
@@ -21,7 +25,14 @@ const rows = [
     <ul class="links">
       {rows.map((r) => (
         <li>
-          {r.href ? (
+          {r.social ? (
+            <div class="row">
+              <span class="k">{r.k}</span>
+              <span class="v v-links">
+                {r.social.map((s) => <a href={s.url} rel="noopener noreferrer me" target="_blank">{s.name}</a>)}
+              </span>
+            </div>
+          ) : r.href ? (
             <a href={r.href} rel={r.ext ? 'noopener noreferrer me' : undefined} target={r.ext ? '_blank' : undefined}>
               <span class="k">{r.k}</span><span class="v">{r.v}</span>
             </a>

@@ -156,8 +156,10 @@ body.scrolled:not(.home) .site-header .logo-svg { width: var(--logo-compact); }
 
 /* İletişim */
 .links { list-style: none; margin: 0 0 4rem; padding: 0; border-top: 1px solid var(--line); }
-.links a, .links .row { display: flex; align-items: baseline; justify-content: space-between; gap: 1.5rem; padding-block: 1.35rem; border-bottom: 1px solid var(--line); text-decoration: none; }
+.links > li > a, .links .row { display: flex; align-items: baseline; justify-content: space-between; gap: 1.5rem; padding-block: 1.35rem; border-bottom: 1px solid var(--line); text-decoration: none; }
 .links .k { color: var(--muted); font-size: .9rem; min-width: 7rem; }
+.links .v-links { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: .25rem 1.5rem; }
+.links .v-links a { text-decoration: none; }
 .links .v { font-size: clamp(1.25rem, 3vw, 1.9rem); font-weight: 600; letter-spacing: -0.03em; text-align: right; overflow-wrap: anywhere; }
 /* İletişim: harita (siyah temaya uyması için koyulaştırıldı) */
 .map { margin: 0 0 4rem; }
@@ -166,11 +168,12 @@ body.scrolled:not(.home) .site-header .logo-svg { width: var(--logo-compact); }
 .map-open { display: inline-block; margin-top: 1rem; font-weight: 600; text-decoration: none; }
 .map-open:hover { text-decoration: underline; text-underline-offset: .2em; }
 @media (max-width: 40rem) { .map-frame { aspect-ratio: 4 / 5; } }
-.links a:hover .v { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: .2em; }
+.links > li > a:hover .v, .links .v-links a:hover { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: .2em; }
 .contact-lede { max-width: 30rem; color: var(--muted); margin-top: 1.5rem; }
 
 @media (max-width: 560px) {
-  .links a, .links .row { flex-direction: column; align-items: flex-start; gap: .3rem; }
+  .links > li > a, .links .row { flex-direction: column; align-items: flex-start; gap: .3rem; }
   .links .v { text-align: left; font-size: 1.4rem; }
+  .links .v-links { justify-content: flex-start; }
   .links .k { min-width: 0; }
 }
