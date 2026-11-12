@@ -1,14 +1,8 @@
 ---
-import { S, socials } from '../lib';
 const year = new Date().getFullYear();
-const soc = socials();
 ---
 <footer class="site-footer">
   <div class="wrap">
     <span>© {year} Erdur Group</span>
-    <nav aria-label="Bağlantılar">
-      {soc.map((s) => <a href={s.url} rel="noopener noreferrer me" target="_blank">{s.name}</a>)}
-      {S.contact.email && <a href={`mailto:${S.contact.email}`}>e-posta</a>}
-    </nav>
   </div>
 </footer>
