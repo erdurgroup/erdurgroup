@@ -1,9 +1,15 @@
 {
-  "heroKicker": "Konya · Emirgazi",
-  "heroTitle": "Toprağın, suyun ve emeğin ortak adı.",
-  "heroText": "Erdur Group; tarım, sulama ve tarım makineleri alanında sahadan öğrendiği bilgiyi, güveni ve işçiliği tek çatı altında toplar.",
-  "manifestoTitle": "Doğru bilgiyle yapılan iş, mevsimlerden uzun yaşar.",
   "manifesto": "Burası bir katalog değil, bir bilgi odası. Tarımda ve sulamada sahada işe yarayan ne varsa, sade ve açık bir dille burada paylaşıyoruz.",
+  "contact": {
+    "phone": "",
+    "whatsapp": "",
+    "email": "erdurgroup@gmail.com",
+    "address": "Türkiye",
+    "mapsUrl": "https://share.google/O9VYVOfrsS4gtEVod"
+  },
+  "heroText": "",
+  "theme": "siyah",
+  "logoSize": "orta",
   "brands": [
     {
       "name": "Erdur Ziraat",
@@ -24,17 +30,15 @@
       "url": ""
     }
   ],
-  "contact": {
-    "phone": "",
-    "whatsapp": "",
-    "email": "erdurgroup@gmail.com",
-    "address": "Emirgazi, Konya",
-    "mapsUrl": ""
-  },
+  "heroKicker": "",
   "social": {
     "instagram": "https://www.instagram.com/erdurgroup/",
     "facebook": "https://www.facebook.com/profile.php?id=61596321391105",
     "youtube": "",
     "tiktok": ""
-  }
+  },
+  "logoPosition": "sol-ust",
+  "motion": true,
+  "manifestoTitle": "Doğru bilgiyle yapılan iş, mevsimlerden uzun yaşar.",
+  "heroTitle": "erdurgroup"
 }
