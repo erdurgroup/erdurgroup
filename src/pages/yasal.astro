@@ -1,0 +1,135 @@
+---
+import Base from '../layouts/Base.astro';
+import { S } from '../lib';
+
+// Şirket bilgileri panelden (Site Ayarları → Yasal) doldurulur; boş olanlar gösterilmez.
+const L = ((S as Record<string, any>).legal || {}) as Record<string, string>;
+const v = (k: string) => (L[k] || '').trim();
+const email = S.contact.email;
+const company = v('companyName');
+const owner = company || 'erdur group';
+const updated = v('updated') || '17.11.2026';
+
+const kunye = [
+  ['ad', 'erdur group'],
+  company && ['ticari unvan', company],
+  v('taxOffice') && ['vergi dairesi', v('taxOffice')],
+  v('taxNumber') && ['vergi no', v('taxNumber')],
+  v('mersis') && ['mersis no', v('mersis')],
+  v('address') && ['adres', v('address')],
+  email && ['e-posta', email],
+].filter(Boolean) as [string, string][];
+---
+<Base title="Yasal" description="Erdur Group künye, KVKK aydınlatma metni ve çerez bilgilendirmesi.">
+  <div class="wrap">
+    <div class="page-top"><h1 class="display">yasal</h1></div>
+
+    <div class="prose legal">
+      <p class="legal-toc">
+        <a href="#kunye">künye</a>
+        <a href="#kvkk">kvkk aydınlatma metni</a>
+        <a href="#cerezler">çerezler</a>
+        <a href="#icerik">içerik talepleri</a>
+      </p>
+
+      <h2 id="kunye">künye</h2>
+      <dl class="legal-dl">
+        {kunye.map(([k, val]) => (
+          <div>
+            <dt>{k}</dt>
+            <dd>{k === 'e-posta' ? <a href={`mailto:${val}`}>{val}</a> : val}</dd>
+          </div>
+        ))}
+      </dl>
+      {!company && (
+        <p class="muted">
+          erdur group henüz tüzel kişiliği bulunan bir şirket değildir; bir marka ve girişim adıdır. Şirket kurulduğunda
+          ticari unvan, vergi ve MERSİS bilgileri bu sayfada yayınlanacaktır.
+        </p>
+      )}
+
+      <h2 id="kvkk">kvkk aydınlatma metni</h2>
+      <p>
+        Bu metin, 6698 sayılı Kişisel Verilerin Korunması Kanunu’nun (KVKK) 10. maddesi uyarınca, bu siteyi ziyaret eden ve
+        bizimle iletişime geçen kişileri bilgilendirmek için hazırlanmıştır.
+      </p>
+
+      <h3>veri sorumlusu</h3>
+      <p>{owner}{email && <> · <a href={`mailto:${email}`}>{email}</a></>}</p>
+
+      <h3>hangi verileri, neden işliyoruz?</h3>
+      <ul>
+        <li>
+          <strong>Teknik kayıtlar:</strong> Siteyi ziyaret ettiğinizde IP adresiniz, tarayıcı bilgileriniz ve ziyaret zamanı,
+          sitenin barındırıldığı Cloudflare altyapısında kısa süreli teknik kayıt olarak tutulur. Amaç, sitenin güvenli ve
+          kesintisiz çalışmasıdır. Hukuki sebep: meşru menfaat (KVKK m. 5/2-f).
+        </li>
+        <li>
+          <strong>Bize yazdıklarınız:</strong> E-posta veya sosyal medya üzerinden bize ulaşırsanız adınız, iletişim bilginiz
+          ve mesajınızın içeriği, yalnızca talebinizi yanıtlamak için işlenir. Hukuki sebep: talebinizle ilgili işlemin
+          yapılması ve meşru menfaat (KVKK m. 5/2-c, 5/2-f).
+        </li>
+        <li>
+          <strong>Harita:</strong> İletişim sayfasındaki Google Haritası, siz “haritayı göster” butonuna basana kadar
+          yüklenmez. Basarsanız IP adresiniz ve tarayıcı bilgileriniz Google’a iletilir. Hukuki sebep: açık rızanız (KVKK m.
+          5/1).
+        </li>
+      </ul>
+      <p>Sitede üyelik, form, reklam veya ziyaretçi takip (analitik) aracı bulunmamaktadır.</p>
+
+      <h3>kimlere aktarılır?</h3>
+      <p>
+        Veriler satılmaz ve pazarlama amacıyla paylaşılmaz. Yalnızca hizmet aldığımız şu sağlayıcıların altyapısında
+        işlenir; bu sağlayıcıların sunucuları yurt dışında bulunabilir (KVKK m. 9):
+      </p>
+      <ul>
+        <li><strong>Cloudflare</strong>: sitenin barındırılması ve güvenliği.</li>
+        <li><strong>Google</strong>: e-posta hizmeti ve (onay vermeniz hâlinde) harita.</li>
+        <li><strong>Meta</strong>: Instagram veya Facebook üzerinden yazmanız hâlinde.</li>
+      </ul>
+      <p>Yasal bir zorunluluk olduğunda, yetkili kamu kurumlarıyla paylaşılabilir.</p>
+
+      <h3>ne kadar saklanır?</h3>
+      <p>
+        Teknik kayıtlar sağlayıcının belirlediği kısa süre boyunca, yazışmalar ise talebiniz sonuçlandıktan sonra makul
+        bir süre boyunca saklanır; ardından silinir.
+      </p>
+
+      <h3>haklarınız</h3>
+      <p>KVKK’nın 11. maddesi uyarınca;</p>
+      <ul>
+        <li>kişisel verinizin işlenip işlenmediğini öğrenme ve işlenmişse bilgi talep etme,</li>
+        <li>işlenme amacını ve amaca uygun kullanılıp kullanılmadığını öğrenme,</li>
+        <li>yurt içinde veya yurt dışında aktarıldığı üçüncü kişileri bilme,</li>
+        <li>eksik veya yanlış işlenmişse düzeltilmesini, şartları oluştuğunda silinmesini isteme,</li>
+        <li>bu işlemlerin aktarılan üçüncü kişilere bildirilmesini isteme,</li>
+        <li>otomatik sistemlerle analiz sonucu aleyhinize bir sonuç çıkmasına itiraz etme,</li>
+        <li>kanuna aykırı işleme nedeniyle zarara uğramanız hâlinde zararın giderilmesini talep etme</li>
+      </ul>
+      <p>
+        haklarına sahipsiniz. Talepleriniz için {email ? <a href={`mailto:${email}`}>{email}</a> : 'iletişim sayfamızdaki'}
+        adresine yazabilirsiniz; en geç 30 gün içinde ücretsiz olarak yanıtlanır.
+      </p>
+
+      <h2 id="cerezler">çerezler</h2>
+      <p>
+        Bu site kendi çerezini kullanmaz; tarayıcınızda bilgi saklamaz, ziyaretçi takibi ve reklam aracı içermez. Bu
+        nedenle çerez onay penceresi göstermiyoruz.
+      </p>
+      <p>
+        Tek istisna iletişim sayfasındaki Google Haritası’dır: harita, siz “haritayı göster” butonuna basana kadar
+        yüklenmez. Basarsanız Google kendi çerezlerini kullanabilir; ayrıntılar için
+        <a href="https://policies.google.com/privacy?hl=tr" target="_blank" rel="noopener noreferrer">Google Gizlilik Politikası</a>.
+      </p>
+
+      <h2 id="icerik">içerik talepleri</h2>
+      <p>
+        Sitedeki bir içeriğin hatalı olduğunu, haklarınızı ihlal ettiğini düşünüyorsanız ya da kaldırılmasını
+        istiyorsanız, ilgili sayfanın adresiyle birlikte {email ? <a href={`mailto:${email}`}>{email}</a> : 'bize'}
+        adresine yazın. Talebinizi en kısa sürede inceleyip size dönüş yaparız.
+      </p>
+
+      <p class="muted legal-updated">son güncelleme: {updated}</p>
+    </div>
+  </div>
+</Base>

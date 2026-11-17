@@ -42,5 +42,13 @@
   "logoPosition": "sol-ust",
   "motion": true,
   "manifestoTitle": "Doğru bilgiyle yapılan iş, mevsimlerden uzun yaşar.",
-  "heroTitle": "erdurgroup"
+  "heroTitle": "erdurgroup",
+  "legal": {
+    "companyName": "",
+    "taxOffice": "",
+    "taxNumber": "",
+    "mersis": "",
+    "address": "",
+    "updated": "17.11.2026"
+  }
 }

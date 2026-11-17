@@ -46,13 +46,11 @@ const rows = [
     {mapEmbed && (
       <section class="map" aria-label="Haritada konumumuz">
         <div class="map-frame">
-          <iframe
-            src={mapEmbed}
-            title={`Google Haritalar: ${mapsQuery}`}
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-            allowfullscreen
-          ></iframe>
+          <!-- Harita, ziyaretçi onay verene kadar yüklenmez (Google'a veri gitmez, çerez yok). -->
+          <div class="map-consent" data-src={mapEmbed} data-title={`Google Haritalar: ${mapsQuery}`}>
+            <button type="button" class="map-show">haritayı göster</button>
+            <p>Harita Google tarafından yüklenir. <a href="/yasal#cerezler">ayrıntılar</a></p>
+          </div>
         </div>
         {mapOpen && (
           <a class="map-open" href={mapOpen} target="_blank" rel="noopener noreferrer">google haritalar'da aç / yol tarifi al <span aria-hidden="true">↗</span></a>
@@ -60,4 +58,5 @@ const rows = [
       </section>
     )}
   </div>
+  <script is:inline src="/map-consent.js" defer></script>
 </Base>

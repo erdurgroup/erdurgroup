@@ -85,3 +85,14 @@ collections:
               - { label: Facebook, name: facebook, widget: string, required: false }
               - { label: YouTube, name: youtube, widget: string, required: false }
               - { label: TikTok, name: tiktok, widget: string, required: false }
+          - label: Yasal (şirket bilgileri; boş bırakılan görünmez)
+            name: legal
+            widget: object
+            required: false
+            fields:
+              - { label: Ticari unvan (doluysa "henüz şirket değil" notu kalkar), name: companyName, widget: string, required: false }
+              - { label: Vergi dairesi, name: taxOffice, widget: string, required: false }
+              - { label: Vergi numarası, name: taxNumber, widget: string, required: false }
+              - { label: MERSİS numarası, name: mersis, widget: string, required: false }
+              - { label: Şirket adresi, name: address, widget: string, required: false }
+              - { label: Son güncelleme tarihi (GG.AA.YYYY), name: updated, widget: string, required: false }

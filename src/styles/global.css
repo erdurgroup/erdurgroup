@@ -164,6 +164,10 @@ body.scrolled:not(.home) .site-header .logo-svg { width: var(--logo-compact); }
 .map { margin: 0 0 4rem; }
 .map-frame { position: relative; aspect-ratio: 16 / 9; border: 1px solid var(--line); overflow: hidden; background: #111; }
 .map-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; filter: grayscale(1) invert(.92) contrast(.9); }
+.map-consent { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .75rem; padding: 1.5rem; text-align: center; color: var(--muted); font-size: .875rem; }
+.map-consent p { margin: 0; }
+.map-show { font: inherit; font-size: 1.05rem; font-weight: 600; color: var(--fg); background: transparent; border: 1px solid var(--fg); border-radius: 999px; padding: .65rem 1.4rem; cursor: pointer; transition: background-color .2s, color .2s; }
+.map-show:hover, .map-show:focus-visible { background: var(--fg); color: var(--bg); }
 .map-open { display: inline-block; margin-top: 1rem; font-weight: 600; text-decoration: none; }
 .map-open:hover { text-decoration: underline; text-underline-offset: .2em; }
 @media (max-width: 40rem) { .map-frame { aspect-ratio: 4 / 5; } }
@@ -176,3 +180,20 @@ body.scrolled:not(.home) .site-header .logo-svg { width: var(--logo-compact); }
   .links .v-links { justify-content: flex-start; }
   .links .k { min-width: 0; }
 }
+
+/* Alt bilgi: yasal linki */
+.site-footer a { color: inherit; text-decoration: none; }
+.site-footer a:hover { color: var(--fg); text-decoration: underline; text-underline-offset: .2em; }
+
+/* Yasal sayfası */
+.legal { font-size: 1rem; }
+.legal h2 { scroll-margin-top: 6rem; }
+.legal h3 { font-size: 1.1rem; margin-top: 1.75rem; }
+.legal-toc { display: flex; flex-wrap: wrap; gap: .4rem 1.25rem; font-weight: 600; }
+.legal-toc a { text-decoration: none; }
+.legal-toc a:hover { text-decoration: underline; text-underline-offset: .2em; }
+.legal-dl { margin: 0; border-top: 1px solid var(--line); }
+.legal-dl > div { display: flex; justify-content: space-between; gap: 1.5rem; padding-block: .8rem; border-bottom: 1px solid var(--line); }
+.legal-dl dt { color: var(--muted); font-size: .9rem; }
+.legal-dl dd { margin: 0; text-align: right; font-weight: 600; overflow-wrap: anywhere; }
+.legal-updated { margin-top: 3rem; font-size: .875rem; }
