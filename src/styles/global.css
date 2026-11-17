@@ -64,7 +64,7 @@ body:not(.home) main { padding-top: var(--head-h); }
 .logo-svg { display: block; height: 2.1rem; width: auto; }
 
 /* Ana sayfa */
-:root { --mx: 0; --my: 0; --sp: 0; --sv: 0; }
+:root { --sp: 0; --sv: 0; }
 /* Ana sayfada küçük header logosu, büyük logo kaybolunca belirir. */
 .home .header-logo { visibility: hidden; opacity: 0; transition: opacity .3s, visibility .3s; }
 .home .header-logo .logo-svg { height: auto; width: var(--logo-compact); }
@@ -75,9 +75,8 @@ body:not(.home) main { padding-top: var(--head-h); }
 .tilt {
   will-change: transform, opacity;
   transform:
-    translate3d(calc(var(--mx) * 16px), calc(var(--my) * 10px + var(--sp) * -70px), 0)
-    rotateY(calc(var(--mx) * 10deg))
-    rotateX(calc(var(--my) * -8deg + var(--sv) * 7deg))
+    translate3d(0, calc(var(--sp) * -70px), 0)
+    rotateX(calc(var(--sv) * 7deg))
     scale(calc(1 - var(--sp) * .4));
   opacity: calc(1 - var(--sp) * .95);
 }
